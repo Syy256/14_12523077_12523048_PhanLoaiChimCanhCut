@@ -1,0 +1,88 @@
+services:
+
+  # ==========================================================
+  # AI SERVICE
+  # ==========================================================
+
+  ai-service:
+
+    build:
+      context: .
+      dockerfile: AI-models/service/Dockerfile
+
+    ports:
+      - "8001:8000"
+
+    restart: unless-stopped
+
+
+  # ==========================================================
+  # BACKEND
+  # ==========================================================
+
+  backend:
+
+    build:
+      context: .
+      dockerfile: App/Backend/Dockerfile
+
+    ports:
+      - "8000:8000"
+
+    environment:
+      AI_SERVICE_URL: http://ai-service:8000
+      MONGO_URL: mongodb://mongodb:27017
+      MONGO_DB: penguin_app
+
+    depends_on:
+      - ai-service
+      - mongodb
+
+    restart: unless-stopped
+
+
+  # ==========================================================
+  # FRONTEND
+  # ==========================================================
+
+  frontend:
+
+    build:
+      context: ./App/Frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: http://localhost:8000
+
+    ports:
+      - "5173:80"
+
+    depends_on:
+      - backend
+
+    restart: unless-stopped
+
+
+  # ==========================================================
+  # MONGODB
+  # ==========================================================
+
+  mongodb:
+
+    image: mongo:8
+
+    ports:
+      - "27017:27017"
+
+    volumes:
+      - mongodb_data:/data/db
+
+    restart: unless-stopped
+
+
+# ============================================================
+# VOLUMES
+# ============================================================
+
+volumes:
+
+  mongodb_data:
