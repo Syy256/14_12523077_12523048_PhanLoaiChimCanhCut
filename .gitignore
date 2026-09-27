@@ -1,0 +1,35 @@
+.venv/
+venv/
+env/
+
+__pycache__/
+*.pyc
+
+.env
+.env.*
+!.env.example
+
+.ipynb_checkpoints/
+
+.vscode/
+.idea/
+
+*.log
+
+# Node
+node_modules/
+dist/
+
+# Python
+.pytest_cache/
+.coverage
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.pid
+
+# Kaggle
+kaggle.json
