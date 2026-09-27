@@ -379,9 +379,11 @@ function App() {
 
       try {
 
-        const response = await fetch(
-          `${API}/api/model-info`
-        );
+        const response = await fetch(`${API}/api/model-info`, {
+          headers: {
+           "ngrok-skip-browser-warning": "true"
+          }
+      });
 
 
         if (!response.ok) {
