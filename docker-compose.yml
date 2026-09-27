@@ -30,9 +30,9 @@ services:
       - "8000:8000"
 
     environment:
-      AI_SERVICE_URL: http://ai-service:8000
-      MONGO_URL: mongodb://mongodb:27017
-      MONGO_DB: penguin_app
+      AI_SERVICE_URL: ${AI_SERVICE_URL}
+      MONGO_URL: ${MONGO_URL}
+      MONGO_DB: ${MONGO_DB}
 
     depends_on:
       - ai-service
@@ -50,8 +50,9 @@ services:
     build:
       context: ./App/Frontend
       dockerfile: Dockerfile
+
       args:
-        VITE_API_URL: http://localhost:8000
+        VITE_API_URL: ${VITE_API_URL}
 
     ports:
       - "5173:80"
