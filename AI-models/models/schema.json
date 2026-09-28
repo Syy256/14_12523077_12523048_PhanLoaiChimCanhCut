@@ -1,0 +1,29 @@
+{
+  "target": "species",
+  "features": {
+    "culmen_length_mm": {
+      "type": "number",
+      "required": true
+    },
+    "culmen_depth_mm": {
+      "type": "number",
+      "required": true
+    },
+    "flipper_length_mm": {
+      "type": "number",
+      "required": true
+    },
+    "body_mass_g": {
+      "type": "number",
+      "required": true
+    },
+    "island": {
+      "type": "string",
+      "required": true
+    },
+    "sex": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
